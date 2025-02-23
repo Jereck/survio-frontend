@@ -16,7 +16,9 @@ export default function UserManagement() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch("http://localhost:5000/users", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+      const res = await fetch(`${API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -36,7 +38,9 @@ export default function UserManagement() {
   }, [token, user]);
 
   const handleRoleChange = async (userId: string, newRole: string) => {
-    const res = await fetch("http://localhost:5000/users/change-role", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+    const res = await fetch(`${API_URL}/users/change-role`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +58,9 @@ export default function UserManagement() {
   };
 
   const handleRemoveUser = async (userId: string) => {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+    const res = await fetch(`${API_URL}/users/${userId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

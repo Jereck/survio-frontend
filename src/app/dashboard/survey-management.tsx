@@ -14,7 +14,9 @@ export default function SurveyManagement({ surveys, refreshSurveys }: { surveys:
 
   const handleCreateSurvey = async () => {
     if (!surveyTitle) return;
-    const res = await fetch("http://localhost:5000/surveys", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+    const res = await fetch(`${API_URL}/surveys`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -33,13 +33,14 @@ export default function DashboardPage() {
     console.log("Dashboard token:", token);
 
     const fetchData = async () => {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       try {
-        const resTeams = await fetch("http://localhost:5000/teams", {
+        const resTeams = await fetch(`${API_URL}/teams`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTeams(await resTeams.json());
 
-        const resSurveys = await fetch("http://localhost:5000/surveys", {
+        const resSurveys = await fetch(`${API_URL}/surveys`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setSurveys(await resSurveys.json());

@@ -20,7 +20,8 @@ export default function TeamPage() {
     if (!id) return;
     
     const fetchTeam = async () => {
-      const res = await fetch(`http://localhost:5000/teams/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const res = await fetch(`${API_URL}/teams/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();

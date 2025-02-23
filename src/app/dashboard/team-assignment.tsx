@@ -21,16 +21,18 @@ export default function TeamAssignment() {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
   const [message, setMessage] = useState("");
-
+  
   useEffect(() => {
+    
     const fetchUsersAndTeams = async () => {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       try {
-        const resUsers = await fetch("http://localhost:5000/users", {
+        const resUsers = await fetch(`${API_URL}/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const dataUsers = await resUsers.json();
 
-        const resTeams = await fetch("http://localhost:5000/teams", {
+        const resTeams = await fetch(`${API_URL}/teams`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const dataTeams = await resTeams.json();
@@ -47,8 +49,8 @@ export default function TeamAssignment() {
 
   const handleAssign = async () => {
     if (!selectedUser || !selectedTeam) return;
-
-    const res = await fetch("http://localhost:5000/teams/assign-team", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const res = await fetch(`${API_URL}/teams/assign-team`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -16,7 +16,8 @@ export default function TeamMembers({ teamId }: { teamId: string }) {
 
   useEffect(() => {
     const fetchMembers = async () => {
-      const res = await fetch(`http://localhost:5000/teams/${teamId}/members`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const res = await fetch(`${API_URL}/teams/${teamId}/members`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMembers(await res.json());
@@ -26,7 +27,9 @@ export default function TeamMembers({ teamId }: { teamId: string }) {
   }, [teamId, token]);
 
   const handleRoleChange = async (memberId: string, newRole: string) => {
-    const res = await fetch(`http://localhost:5000/teams/members/${memberId}`, {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+    const res = await fetch(`${API_URL}/teams/members/${memberId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +47,8 @@ export default function TeamMembers({ teamId }: { teamId: string }) {
   };
 
   const handleRemoveMember = async (memberId: string) => {
-    const res = await fetch(`http://localhost:5000/teams/members/${memberId}`, {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const res = await fetch(`${API_URL}/teams/members/${memberId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

@@ -16,7 +16,8 @@ export default function AcceptInvitePage() {
     }
 
     const acceptInvite = async () => {
-      const res = await fetch("http://localhost:5000/teams/accept-invite", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const res = await fetch(`${API_URL}/teams/accept-invite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),

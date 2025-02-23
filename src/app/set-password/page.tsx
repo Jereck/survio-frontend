@@ -17,7 +17,9 @@ export default function SetPasswordPage() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/auth/set-password", {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+    const res = await fetch(`${API_URL}/auth/set-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId, password }),
