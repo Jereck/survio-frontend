@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Survio Frontend
 
-## Getting Started
+This is the frontend for **Survio**, a survey building and distribution platform for indie game developers.
 
-First, run the development server:
+## 📌 Features
+- **User Authentication** (Custom auth with JWT & Role-Based Access)
+- **Team Management** (Assign users to teams, manage permissions)
+- **Survey Management** (Create, update, delete surveys)
+- **Dashboard UI** (Role-based UI with restricted views)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tech Stack
+- **Next.js 15** (React Framework with App Router)
+- **TypeScript** (Strong typing)
+- **Tailwind CSS** (Styling)
+- **Zustand** (State management)
+- **Vercel** (Hosting)
+- **Fetch API** (For API requests)
+
+## 📂 Project Structure
+```
+frontend/
+│── src/
+│   ├── app/           # Next.js App Router pages
+│   ├── components/    # Reusable UI components
+│   ├── hooks/         # Custom React hooks
+│   ├── store/         # Zustand state management
+│── public/            # Static assets
+│── package.json       # Dependencies
+│── .env.local         # Environment variables
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Setup & Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/yourusername/survio-frontend.git
+cd survio-frontend
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **2️⃣ Install Dependencies**
+```sh
+npm install
+```
 
-## Learn More
+### **3️⃣ Set Up Environment Variables**
+Create a `.env.local` file in the root and configure:
+```ini
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+For production, use your deployed API URL:
+```ini
+NEXT_PUBLIC_API_URL=https://survio-backend.onrender.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+### **4️⃣ Run the Frontend**
+```sh
+npm run dev
+```
+The app should now be running at **http://localhost:3000** 🚀
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌍 Deployment
+### Deploy to **Vercel**
+1. **Push code to GitHub**
+2. **Go to [Vercel](https://vercel.com/)** → Create new project
+3. **Set Environment Variables** (NEXT_PUBLIC_API_URL)
+4. **Deploy!** 🚀
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📜 License
+MIT License © 2025 Your Name
