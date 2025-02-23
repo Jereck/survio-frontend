@@ -1,101 +1,146 @@
-import Image from "next/image";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChevronRight, BarChart2, Users, Zap, CheckCircle } from "lucide-react"
+import Image from "next/image"
+import Navbar from "@/components/Navbar"
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      <main className="flex-grow">
+        <section className="py-20 sm:py-32">
+          <div className="container max-w-screen-xl mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 flex-1">
+                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl xl:text-6xl">
+                  User Research Made <span className="text-primary">Simple</span>
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-[600px]">
+                  Create, distribute, and analyze surveys with ease. Empower your indie development with data-driven
+                  decisions.
+                </p>
+                <Button size="lg" className="mt-4">
+                  Get Started for Free
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+              <div className="flex-1 w-full max-w-[600px]">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-[32px] blur-3xl opacity-25 animate-pulse"></div>
+                  <div className="relative bg-white/50 backdrop-blur-sm rounded-[32px] border shadow-2xl shadow-primary/10 transition duration-300 hover:scale-[1.02] hover:shadow-primary/20">
+                    <Image
+                      src="/placeholder.png"
+                      alt="Survur.io Dashboard"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto rounded-[32px]"
+                      priority
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="py-20 sm:py-32 bg-muted/50">
+          <div className="container max-w-screen-xl mx-auto px-4">
+            <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Why Choose Survur.io?</h2>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { icon: Zap, title: "Lightning Fast", description: "Create and launch surveys in minutes, not hours." },
+                {
+                  icon: Users,
+                  title: "User-Centric",
+                  description: "Designed specifically for indie developers and their needs.",
+                },
+                {
+                  icon: CheckCircle,
+                  title: "Actionable Insights",
+                  description: "Get clear, data-driven insights to improve your products.",
+                },
+              ].map((feature, index) => (
+                <Card key={index}>
+                  <CardHeader className="text-center">
+                    <div className="mx-auto">
+                      <feature.icon className="h-12 w-12 text-primary mb-4" />
+                    </div>
+                    <CardTitle className="text-xl">{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-center">{feature.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="how-it-works" className="py-20 sm:py-32">
+          <div className="container max-w-screen-xl mx-auto px-4">
+            <h2 className="text-3xl font-bold tracking-tight text-center mb-12">How It Works</h2>
+            <div className="grid gap-12 md:grid-cols-3">
+              {[
+                {
+                  step: "1",
+                  title: "Create Your Survey",
+                  description: "Design your survey with our intuitive builder.",
+                },
+                { step: "2", title: "Distribute", description: "Share your survey with your target audience easily." },
+                { step: "3", title: "Analyze Results", description: "Get powerful insights from your survey data." },
+              ].map((step, index) => (
+                <div key={index} className="flex flex-col items-center text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-2xl font-bold mb-6">
+                    {step.step}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 sm:py-32 bg-muted">
+          <div className="container max-w-screen-xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to Supercharge Your User Research?</h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-[600px] mx-auto">
+              Join thousands of indie developers making data-driven decisions with Survur.io
+            </p>
+            <Button size="lg">
+              Start Your Free Trial
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="border-t bg-muted/50">
+        <div className="container max-w-screen-xl mx-auto px-4 py-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <BarChart2 className="h-6 w-6" />
+              <span className="font-bold">Survur.io</span>
+            </div>
+            <p className="text-sm text-muted-foreground mt-4 sm:mt-0">© 2024 Survur.io. All rights reserved.</p>
+            <nav className="flex gap-4 mt-4 sm:mt-0">
+              <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+                Terms
+              </Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+                Privacy
+              </Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+                Contact
+              </Link>
+            </nav>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
