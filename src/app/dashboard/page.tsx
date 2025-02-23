@@ -54,8 +54,7 @@ export default function DashboardPage() {
     <div className="container mx-auto p-6 space-y-8">
       <div className="flex justify-between items-center">
         <div>
-          {/* <h1 className="text-3xl font-bold">Welcome back, {user?.email}</h1> */}
-          <h1 className="text-3xl font-bold">Welcome back, John Doe</h1>
+          <h1 className="text-3xl font-bold">Welcome back, {user?.email}</h1>
           <p className="text-muted-foreground">Here&apos;s what&apos;s happening with your surveys today.</p>
         </div>
         <Avatar className="h-12 w-12">
