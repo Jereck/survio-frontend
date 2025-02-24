@@ -23,7 +23,10 @@ function Navbar() {
           <Link href="#how-it-works" className="text-sm font-medium hover:underline underline-offset-4">
             How It Works
           </Link>
-          <Button variant="outline" onClick={() => router.push('/login')}>Log In</Button>
+          <Link href="#how-it-works" className="text-sm font-medium hover:underline underline-offset-4">
+            Pricing
+          </Link>
+          <Button variant="outline" onClick={() => router.push('/pricing')}>Sign Up</Button>
         </nav>
       </div>
     </header>
