@@ -1,68 +1,89 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { BarChart2, LogIn, Eye, EyeOff } from "lucide-react"
 
-export default function SignupPage() {
-  const searchParams = useSearchParams();
+export default function LoginPage() {
   const router = useRouter();
-  const plan = searchParams.get("plan") || "free_monthly"; // Default to Free plan
-
+  const { login } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
-  const handleSignup = async () => {
-    setLoading(true);
-    setError("");
-
-    const res = await fetch("http://localhost:5000/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, subscription_plan: plan }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      // Redirect to checkout with user_id
-      localStorage.setItem("token", data.token);
-
-      router.push(`/checkout?user_id=${data.user.id}&plan=${plan}&token=${data.token}`);
-    } else {
-      setError(data.message || "Signup failed");
-      setLoading(false);
-    }
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await login(email, password);
+    router.push("/dashboard");
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div className="p-6 bg-white shadow-md rounded w-96">
-        <h2 className="text-xl font-bold mb-4">Sign Up</h2>
-        {error && <p className="text-red-500">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border p-2 rounded mb-2"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-2 rounded mb-2"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          onClick={handleSignup}
-          disabled={loading}
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          {loading ? "Signing Up..." : "Continue"}
-        </button>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <div className="flex items-center justify-center mb-4">
+            <BarChart2 className="h-8 w-8 text-primary mr-2" />
+            <CardTitle className="text-2xl font-bold">Survur.io</CardTitle>
+          </div>
+          <CardDescription>Enter your email and password to login</CardDescription>
+        </CardHeader>
+        <form onSubmit={handleLogin}>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4 text-gray-500" />
+                  ) : (
+                    <Eye className="h-4 w-4 text-gray-500" />
+                  )}
+                  <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4">
+            <Button type="submit" className="w-full">
+              <LogIn className="mr-2 h-4 w-4" /> Login
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
     </div>
   );
 }

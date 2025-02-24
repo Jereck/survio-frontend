@@ -53,7 +53,7 @@ export default function PricingPage() {
   const router = useRouter()
 
   const handleSelectPlan = (lookupKey: string) => {
-    router.push(`/login?plan=${lookupKey}`)
+    router.push(`/signup?plan=${lookupKey}`)
   }
 
   return (

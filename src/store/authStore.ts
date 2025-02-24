@@ -7,6 +7,9 @@ interface User {
   userId: string;
   email: string;
   role: string;
+  username: string;
+  first_name: string;
+  last_name: string;
 }
 
 interface AuthState {
@@ -39,6 +42,7 @@ export const useAuthStore = create<AuthState>((set) => {
         const data = await res.json();
         if (res.ok) {
           const decoded: User = jwtDecode(data.token);
+          console.log("Decoded user: ", decoded);
           set({ user: decoded, token: data.token });
           localStorage.setItem("token", data.token);
         } else {
