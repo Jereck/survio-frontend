@@ -42,13 +42,6 @@ export default function DashboardPage() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    if (typeof window === "undefined") return
-
-    if (!token) {
-      router.push("/login")
-      return
-    }
-
     const fetchData = async () => {
       try {
         const [subRes, teamsRes, surveysRes] = await Promise.all([

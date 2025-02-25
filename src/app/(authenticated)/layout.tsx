@@ -2,10 +2,12 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import DashboardHeader from "@/components/DashboardHeader"
 import Link from "next/link"
 import { Home, Users, FileText, Settings } from "lucide-react"
+import { useAuthStore } from "@/store/authStore"
+import { useRouter } from "next/navigation"
 
 export default function DashboardLayout({
   children,
@@ -13,6 +15,16 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { token } = useAuthStore()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    
+    if (!token) {
+      router.push("/login");
+    }
+  }, [token, router]);
 
   return (
     <div className="flex h-screen flex-col">
@@ -28,7 +40,7 @@ export default function DashboardLayout({
               <Users className="h-5 w-5" />
               <span>Teams</span>
             </Link>
-            <Link href="/dashboard/surveys" className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200">
+            <Link href="/surveys" className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200">
               <FileText className="h-5 w-5" />
               <span>Surveys</span>
             </Link>

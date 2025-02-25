@@ -3,12 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChevronRight, BarChart2, Users, Zap, CheckCircle } from "lucide-react"
 import Image from "next/image"
-import Navbar from "@/components/Navbar"
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
 
       <main className="flex-grow">
         <section className="py-20 sm:py-32">
