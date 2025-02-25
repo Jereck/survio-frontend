@@ -20,7 +20,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     if (typeof window === "undefined") return
-    
+
     if (!token) {
       router.push("/login");
     }
@@ -36,7 +36,7 @@ export default function DashboardLayout({
               <Home className="h-5 w-5" />
               <span>Dashboard</span>
             </Link>
-            <Link href="/dashboard/teams" className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200">
+            <Link href="/teams" className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200">
               <Users className="h-5 w-5" />
               <span>Teams</span>
             </Link>
